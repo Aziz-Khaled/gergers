@@ -1,0 +1,264 @@
+#navsec{
+    color: black;
+}
+
+h2{
+    text-decoration: underline;
+    font-style: italic;
+    
+}
+
+h1 ,h2 ,h3 ,h4 ,h5 ,h6 ,p {
+    color: black;
+    font-family: math;
+
+}
+.NavBaa{
+    background-color: white;
+    
+}
+
+.INTRO{
+    margin: auto;
+    width: 100%;
+    height: 666px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #ffff;
+    
+}
+
+
+
+
+
+.introDivPh {
+    width: 50%;
+    border: 1px solid blue;
+    height: 50%;
+}
+
+.phInto {
+    width: 34%;
+    clip-path: circle();
+    /* css pour une petite simple animation pour cette image (duree d'animation 5 seconde):*/
+    animation: updown 5s linear infinite;
+}
+/*  La règle @keyframes permet aux auteurs de définir les étapes qui composent la séquence d'une animation CSS.
+Cela permet de contrôler une animation plus finement que ce qu'on pourrait obtenir avec les transitions.  */
+
+@keyframes updown {
+    0% {
+        transform: translateY(-10px);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.description {
+  font-weight: bold; 
+  font-style : italic;
+  text-align: center;
+  color: white;
+  font-family: math;
+  width: 54%;
+  
+
+}
+
+.fa-arrow-down-right{
+    background-color: white;
+}
+
+.skills-progression{
+    color :white ;
+}
+
+.prog {
+    width: 30%;
+}
+
+#tt{
+    text-align: center;
+}
+
+/* .stat-cont {
+   background-color : #1a1c1fe8 ;
+} */
+
+
+.stat-cont {
+    width: 100%;
+    height: 748px;
+    background: linear-gradient(0deg, rgba(38,205,205,1) 0%, rgba(255,255,255,1) 63%);
+}
+
+.stat {
+    border-radius: 40px 60px;
+    margin-top: 122px;
+    margin-right: 145.023px;
+    margin-left: 145.011px;
+    width: 79%;
+    position: absolute;
+    height: 580px;
+    background-color: #17191b;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.Project-container{
+    background-color: rgb(39 205 205);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.Project-list {
+    border: 1px solid white;
+    margin: auto;
+    width: 1067px;
+}
+
+
+
+.project-disp{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap:wrap ;
+}
+
+/********/
+
+  div.wave{
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    z-index: 99;
+  }
+  
+  .wave svg{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+  
+  #container {
+      position: relative;
+      height: 90vh;
+  }
+
+
+  .SKILLS{
+    padding-bottom: 70px;
+}
+
+
+
+.Contact-container {
+    display: flex;
+    height: 616px;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.Contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+/*      ----------   contact   ----------      ----------        */
+
+
+.newsletter-subscribe {
+    color:#313437;
+    padding:50px 0;
+    width: 65%;
+  }
+  
+  .newsletter-subscribe p {
+    /*color:#7d8285;*/
+    line-height:1.5;
+  }
+  
+  .newsletter-subscribe h2 {
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:25px;
+    line-height:1.5;
+    padding-top:0;
+    margin-top:0;
+    color:inherit;
+  }
+  
+  .newsletter-subscribe .intro {
+    font-size:16px;
+    max-width:500px;
+    margin:0 auto 25px;
+  }
+  
+  .newsletter-subscribe .intro p {
+    margin-bottom:35px;
+  }
+  
+  .newsletter-subscribe form {
+    justify-content:center;
+  }
+  
+  .newsletter-subscribe form .form-control {
+    background:#eff1f4;
+    border:none;
+    border-radius:3px;
+    box-shadow:none;
+    outline:none;
+    color:inherit;
+    text-indent:9px;
+    height:45px;
+    margin-right:10px;
+    min-width:250px;
+  }
+  
+  .newsletter-subscribe form .btn {
+    padding:16px 32px;
+    border:none;
+    background:none;
+    box-shadow:none;
+    text-shadow:none;
+    opacity:0.9;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:13px;
+    letter-spacing:0.4px;
+    line-height:1;
+  }
+  
+  .newsletter-subscribe form .btn:hover {
+    opacity:1;
+  }
+  
+  .newsletter-subscribe form .btn:active {
+    transform:translateY(1px);
+  }
+  
+  .newsletter-subscribe form .btn-primary {
+    background-color:#055ada !important;
+    color:#fff;
+    outline:none !important;
+  }
+  
+
