@@ -10,29 +10,23 @@ import {useNavigate} from 'react-router-dom'
 function Registerr() {
 
   const auth = getAuth(app);
-
   const [email , setEmail] = useState ('') ;
   const [password , setPassword] = useState ('') ;
-  
   const navigate = useNavigate()
- 
-
   const SignIn = (e) => {
   e.preventDefault();
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
 
-    // Signed in 
+    
       const user = userCredential.user ;
       console.log (user) ;
-      console.log ("u signed up successfully !!!!")
-      navigate('/formulaire')
+      alert ("u signed up successfully !!!!")
+      navigate('/formulaire') ; 
       })
   .catch((error) => {
     const errorCode = error.code;
-  //  const errorMessage = error.message;
     alert(errorCode)
-  //  console.log (errorCode)
 })}
 
 
@@ -40,7 +34,7 @@ function Registerr() {
     <div>
 
 <div className="get-in-touch">
-  <h1 className="title">Get in touch</h1>
+  <h1 className="title">Sign up</h1>
   <form className="contact-form row">
 
     <div className="form-field col-lg-12">

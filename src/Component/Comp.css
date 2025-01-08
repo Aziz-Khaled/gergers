@@ -43,7 +43,7 @@ h1 ,h2 ,h3 ,h4 ,h5 ,h6 ,p {
     width: 34%;
     clip-path: circle();
     /* css pour une petite simple animation pour cette image (duree d'animation 5 seconde):*/
-    animation: updown 5s linear infinite;
+    animation: updown 7s linear infinite;
 }
 /*  La règle @keyframes permet aux auteurs de définir les étapes qui composent la séquence d'une animation CSS.
 Cela permet de contrôler une animation plus finement que ce qu'on pourrait obtenir avec les transitions.  */
@@ -136,6 +136,8 @@ Cela permet de contrôler une animation plus finement que ce qu'on pourrait obte
     display: flex;
     justify-content: space-evenly;
     flex-wrap:wrap ;
+    margin-bottom: 30px;
+    
 }
 
 /********/
@@ -178,6 +180,7 @@ Cela permet de contrôler une animation plus finement que ce qu'on pourrait obte
   display: flex;
   justify-content: space-between;
   align-items: center;
+ /* flex-wrap : wrap ;*/ 
 }
 
 
@@ -262,3 +265,7 @@ Cela permet de contrôler une animation plus finement que ce qu'on pourrait obte
   }
   
 
+  .handleErrorDiv{
+    border: 2px solid red;
+    border-radius: 4px;
+  }

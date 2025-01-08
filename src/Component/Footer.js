@@ -31,9 +31,8 @@ function Footer() {
       <li className="list-inline-item">
         <a href="#Contact">Contact</a>
       </li>
-
     </ul>
-    <p className="copyright">Company Name © 2023</p>
+    <p className="copyright">MAK © 2023</p>
   </footer>
 </div>
 

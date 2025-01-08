@@ -5,9 +5,9 @@ function Project() {
   return (
     <div>
         <div className="Project-container" id="Projects">
-            <h2 style={{marginBottom: '40px', textDecoration : 'underline' , fontStyle :'italic' , marginTop : '20px'}}>some mini Projects</h2>
-            <div className= "project-disp">
+            <h2 style={{marginBottom: '40px', textDecoration : 'underline' , fontStyle :'italic' , marginTop : '20px'}}>Projects</h2>
 
+            <div className= "project-disp">
             <Card style={{ width: '18rem' , marginBottom :"12px"}}>
       <Card.Img src = "https://assets.hongkiat.com/uploads/clean-simple-minimalist-website-design/tinker.jpg" />
       <Card.Body>

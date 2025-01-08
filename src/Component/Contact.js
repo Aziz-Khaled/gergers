@@ -10,6 +10,7 @@ function Contact() {
 
   const [email , setEmail] = useState ('') ;
   const [password , setPassword] = useState ('') ;
+  const [message , setMessage] = useState ('')
 
   const auth = getAuth(app);
 
@@ -21,18 +22,16 @@ function Contact() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
+    
     const user = userCredential.user;
     
-      console.log (user) // ...
+      console.log (user) 
       console.log ("keep surfing !!") ; 
       navigate("/formulaire")
   })
   .catch((error) => {
-    const errorCode = error.code;
-    //const errorMessage = error.message;
-   //  console.log (errorMessage)// ..
-     alert ("bad credentials")
+      setMessage ('bad credentials')
+    //alert ("")
   });
   }
 
@@ -51,9 +50,9 @@ function Contact() {
         <div className="newsletter-subscribe">
   <div className="container">
     <div className="intro">
-      <h2 className="text-center">don't hesitate !!</h2>
+      <h2 className="text-center">Get in touch !!</h2>
       <p className="text-center">
-        Contact me for projects or a collab. !!{" "}
+        Contact me for projects or a collab.{" "}
       </p>
     </div>
     <form  className="form-inline" method="post">
@@ -86,19 +85,25 @@ function Contact() {
         </button>
       <Link to ='/Register' style ={{position: 'absolute', marginLeft: '15px', marginTop: '27px'}}> create an account ?</Link>       
       </div>
+        
+        {message && (
+                  <div
+                    className="handleErrorDiv"
+                    style={{
+                      marginTop: '20px',
+                      color: 'red',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {message}
+                  </div>
+                )}
     </form>
   </div>
 </div>
-
-
-
-
-        
-
-
-
         </div>
       </div>
+      
     </div>
   )
 }

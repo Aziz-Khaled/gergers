@@ -1,5 +1,6 @@
 import React from 'react'
 import Creator from '../creator.jpg'
+import 'animate.css';
 
 function Intro() {
   return (
@@ -8,12 +9,13 @@ function Intro() {
             <div className="INTRO">
 
                 <div className="description">
-                    <p style={{whiteSpace: 'normal'}}>
-                    As a web developer, I specialize in creating dynamic and responsive websites using a combination of technologies, including HTML, CSS, JavaScript, and the MERN stack. My expertise in HTML and CSS allows me to design and layout visually stunning pages, 
-                    while JavaScript enables me to create interactive and user-friendly features.
+                    <h1>Hi, i'm Mohamed aziz khaled</h1>
+                    <p style={{whiteSpace: 'normal' , width: "50%", margin: 'auto'}}>
+                    As a junior web developer, I specialize in creating dynamic websites using a combination of technologies including HTML, CSS, JavaScript, and the MERN stack. 
                     </p>
                 </div>
                 <img className="phInto" alt="intro"  src ={Creator}/>
+                
             </div>
 
         </div> 

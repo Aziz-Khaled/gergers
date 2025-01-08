@@ -1,193 +1,202 @@
-import React from 'react'
-import './formulaire.css'
-import {useState} from 'react'
-import { Link } from 'react-router-dom'
-import app from '../Firebase'
-import { collection, addDoc } from "firebase/firestore"; 
-import { getFirestore } from "firebase/firestore";
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import './formulaire.css';
+import { Link } from 'react-router-dom';
+import app from '../Firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 function Formulaire() {
-
   const db = getFirestore(app);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const [name , setName] = useState ("")
-const [email , setEmail] = useState ("")
-const [phoneNumber , setPhoneNumber] = useState ("")
-const [message , setMessage] = useState ("")
-const [workType , setWorkType ] = useState ("")
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [message, setMessage] = useState('');
+  const [workType, setWorkType] = useState('');
+  const [notification, setNotification] = useState('');
+  const [notificationType, setNotificationType] = useState('');
+  const [errors, setErrors] = useState({});
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!name.trim()) newErrors.name = 'Name is required';
+    if (!email.trim()) newErrors.email = 'Email is required';
+    if (!phoneNumber.trim()) newErrors.phoneNumber = 'Phone number is required';
+    if (!workType.trim()) newErrors.workType = 'Work type is required';
+    if (!message.trim()) newErrors.message = 'Description is required';
 
-const postData = async (e) => {
-  e.preventDefault();
-  try {
-    const docRef = await addDoc(collection(db, "users"), {
-      name: name ,
-      email: email,
-      phoneNumber: phoneNumber , 
-      message : message ,
-      workType : workType , 
-      sendAt : new Date()
-    });
-    console.log("Document written with ID: ", docRef.id);
-    alert("thank you for believing in us !! we will contact you as soon as possible ") ;
-    navigate ("/")
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  } catch (e) {
-    console.log("Error adding document: ", e);
-    console.log (e.code)
-  }
-  
-}
+  const postData = async (e) => {
+    e.preventDefault();
 
+    if (!validateForm()) {
+      setNotification('Please fill in all required fields.');
+      setNotificationType('error');
+      return;
+    }
 
+    try {
+      const docRef = await addDoc(collection(db, 'users'), {
+        name,
+        email,
+        phoneNumber,
+        message,
+        workType,
+        sendAt: new Date(),
+      });
+      console.log('Document written with ID: ', docRef.id);
 
+      setNotification('Thank you for believing in us! We will contact you as soon as possible.');
+      setNotificationType('success');
 
+      setName('');
+      setEmail('');
+      setPhoneNumber('');
+      setMessage('');
+      setWorkType('');
 
-
-
-
-
-
-
-
-
-
-
+      setTimeout(() => navigate('/'), 3000);
+    } catch (e) {
+      console.error('Error adding document: ', e);
+      setNotification('An error occurred while submitting the form. Please try again.');
+      setNotificationType('error');
+    }
+  };
 
   return (
     <div>
-<div className="container">
-  
-  <div className=" text-center mt-5 ">
-    <h1>Collab / Personal project Form </h1>
-  </div>
-  <div className="row ">
-    <div className="col-lg-7 mx-auto">
-      <div className="card mt-2 mx-auto p-4 bg-light">
-        <div className="card-body bg-light">
-          <div className="container">
-            <form id="contact-form" role="form">
-              <div className="controls">
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label htmlFor="form_name">Name *</label>
-                      <input
-                        id="form_name"
-                        type="text"
-                        name="name"
-                        className="form-control"
-                        placeholder="Please enter your name "
-                        required="required"
-                        data-error="Firstname is required."
-                        onChange ={(e) => setName(e.target.value)}
-                      />
+      <div className="container">
+        <div className="text-center mt-5">
+          <h1>Collab / Personal Project Form</h1>
+        </div>
+        <div className="row">
+          <div className="col-lg-7 mx-auto">
+            <div className="card mt-2 mx-auto p-4 bg-light">
+              <div className="card-body bg-light">
+                <div className="container">
+                  {notification && (
+                    <div
+                      className={`alert ${
+                        notificationType === 'success' ? 'alert-success' : 'alert-danger'
+                      }`}
+                      role="alert"
+                    >
+                      {notification}
                     </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label htmlFor="form_lastname">Phone number *</label>
-                      <input
-                        id="form_lastname"
-                        type="text"
-                        name="surname"
-                        className="form-control"
-                        placeholder="Please enter your phone number "
-                        required="required"
-                        data-error="PhoneNumber is required."
-                        onChange ={(e) => setPhoneNumber(e.target.value)}
-                      />
+                  )}
+
+                  <form id="contact-form" role="form">
+                    <div className="controls">
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label htmlFor="form_name">Name *</label>
+                            <input
+                              id="form_name"
+                              type="text"
+                              className="form-control"
+                              placeholder="Please enter your name"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            {errors.name && <span className="text-danger">{errors.name}</span>}
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label htmlFor="form_lastname">Phone Number *</label>
+                            <input
+                              id="form_lastname"
+                              type="number"
+                              className="form-control"
+                              placeholder="Please enter your phone number"
+                              value={phoneNumber}
+                              onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                            {errors.phoneNumber && <span className="text-danger">{errors.phoneNumber}</span>}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label htmlFor="form_email">Email *</label>
+                            <input
+                              id="form_email"
+                              type="email"
+                              className="form-control"
+                              placeholder="Please enter your email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                            {errors.email && <span className="text-danger">{errors.email}</span>}
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label htmlFor="form_need">Please Specify Your Need *</label>
+                            <input
+                              id="form_need"
+                              type="text"
+                              className="form-control"
+                              placeholder="Collaboration / Personal project"
+                              value={workType}
+                              onChange={(e) => setWorkType(e.target.value)}
+                            />
+                            {errors.workType && <span className="text-danger">{errors.workType}</span>}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="form-group">
+                            <label htmlFor="form_message">Description *</label>
+                            <textarea
+                              id="form_message"
+                              className="form-control"
+                              placeholder="Describe here."
+                              rows={5}
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
+                            />
+                            {errors.message && <span className="text-danger">{errors.message}</span>}
+                          </div>
+                        </div>
+                        <div className="col-md-12">
+                          <button
+                            type="submit"
+                            className="btn btn-success btn-send pt-2 btn-block"
+                            onClick={postData}
+                          >
+                            Submit
+                          </button>
+                          <Link to="/">
+                            <button
+                              type="button"
+                              className="btn btn-danger btn-send pt-2 btn-block"
+                            >
+                              Back
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label htmlFor="form_email">Email *</label>
-                      <input
-                        id="form_email"
-                        type="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Please enter your email *"
-                        required="required"
-                        data-error="Valid email is required."
-                        onChange ={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-
-                      <label htmlFor="form_need">
-                        Please specify your need *
-                      </label>
-                      
-                      <input
-                        id="form_email"
-                        type="text"
-                        name="text"
-                        className="form-control"
-                        placeholder=" Collaboration / Personal project "
-                        required="required"
-                        onChange ={(e) => setWorkType(e.target.value)}
-                      />
-
-
-
-
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <label htmlFor="form_message">Description *</label>
-                      <textarea
-                        id="form_message"
-                        name="Description"
-                        className="form-control"
-                        placeholder="Describe here."
-                        rows={5}
-                        required="required"
-                        data-error="Please, leave us a message."
-                        defaultValue={""}
-                        onChange ={(e) => setMessage(e.target.value)}
-                        
-                        
-                      />
-                    </div>
-                  </div>
-                  <div  className="col-md-12">
-                    <input
-                      type="submit"
-                      className="btn btn-success btn-send  pt-2 btn-block"
-                      onClick ={postData}
-                    />
-<Link to ='/'>
-                      <input
-                      type=""
-                      className="btn btn- btn-send  pt-2 btn-block"
-                      style={{color : 'red'}}
-                      defaultValue="back"
-/></Link>
-                  </div>
+                  </form>
                 </div>
               </div>
-            </form>
+            </div>
+            {/* /.8 */}
           </div>
+          {/* /.row*/}
         </div>
       </div>
-      {/* /.8 */}
     </div>
-    {/* /.row*/}
-  </div>
-</div>
-
-</div>
-  )
+  );
 }
 
-export default Formulaire
+export default Formulaire;
